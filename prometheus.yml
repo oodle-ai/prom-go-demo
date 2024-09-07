@@ -1,0 +1,16 @@
+global:
+  scrape_interval: 15s
+
+scrape_configs:
+  - job_name: 'go-app'
+    static_configs:
+      - targets: ['go-app:8080']
+  
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+
+remote_write:
+  - url: "${REMOTE_WRITE_URL}"
+    headers:
+      X-API-KEY: "${X_API_KEY}"

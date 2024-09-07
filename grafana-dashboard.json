@@ -1,0 +1,745 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": null,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "id": 1,
+      "gridPos": {
+        "h": 3,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "type": "text",
+      "title": "Dashboard Overview",
+      "options": {
+        "mode": "markdown",
+        "content": "This dashboard shows the application and runtime metrics for the [demo GoLang app](https://github.com/oodle-ai/prom-go-demo)."
+      }
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 3
+      },
+      "id": 2,
+      "panels": [],
+      "title": "Application Metrics",
+      "type": "row"
+    },
+    {
+      "id": 3,
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 4
+      },
+      "type": "graph",
+      "title": "Request Latency",
+      "datasource": null,
+      "targets": [
+        {
+          "expr": "histogram_quantile(0.99, sum(rate(app_latency_seconds_bucket[1m])) by (le))",
+          "legendFormat": "P99",
+          "refId": "P99 Latency"
+        },
+        {
+          "expr": "histogram_quantile(0.5, sum(rate(app_latency_seconds_bucket[1m])) by (le))",
+          "legendFormat": "P50",
+          "refId": "P50 Latency"
+        }
+      ],
+      "yaxes": [
+        {
+          "format": "s",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "fill": 1,
+      "fillGradient": 0,
+      "hiddenSeries": false,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "thresholds": [],
+      "timeRegions": [],
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      },
+      "timeFrom": null,
+      "timeShift": null,
+      "grid": {
+        "threshold1": null,
+        "threshold1Color": "rgba(216, 200, 27, 0.27)",
+        "threshold2": null,
+        "threshold2Color": "rgba(234, 112, 112, 0.22)"
+      }
+    },
+    {
+      "id": 4,
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 4
+      },
+      "type": "graph",
+      "title": "Request Rate",
+      "datasource": null,
+      "targets": [
+        {
+          "expr": "sum(rate(app_requests_total[1m]))",
+          "legendFormat": "Requests/sec",
+          "refId": "Request Rate"
+        }
+      ],
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "fill": 1,
+      "fillGradient": 0,
+      "hiddenSeries": false,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "thresholds": [],
+      "timeRegions": [],
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      },
+      "timeFrom": null,
+      "timeShift": null,
+      "grid": {
+        "threshold1": null,
+        "threshold1Color": "rgba(216, 200, 27, 0.27)",
+        "threshold2": null,
+        "threshold2Color": "rgba(234, 112, 112, 0.22)"
+      }
+    },
+    {
+      "id": 5,
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 12
+      },
+      "type": "graph",
+      "title": "Error Rate",
+      "datasource": null,
+      "targets": [
+        {
+          "expr": "sum(rate(app_errors_total[1m]))",
+          "legendFormat": "Errors/sec",
+          "refId": "Error Rate"
+        }
+      ],
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "fill": 1,
+      "fillGradient": 0,
+      "hiddenSeries": false,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "thresholds": [],
+      "timeRegions": [],
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      },
+      "timeFrom": null,
+      "timeShift": null,
+      "grid": {
+        "threshold1": null,
+        "threshold1Color": "rgba(216, 200, 27, 0.27)",
+        "threshold2": null,
+        "threshold2Color": "rgba(234, 112, 112, 0.22)"
+      }
+    },
+    {
+      "id": 6,
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 12
+      },
+      "type": "graph",
+      "title": "DB Connection Latency",
+      "datasource": null,
+      "targets": [
+        {
+          "expr": "histogram_quantile(0.99, sum(rate(app_db_connection_latency_seconds_bucket[1m])) by (le))",
+          "legendFormat": "P99",
+          "refId": "P99 DB Latency"
+        },
+        {
+          "expr": "histogram_quantile(0.5, sum(rate(app_db_connection_latency_seconds_bucket[1m])) by (le))",
+          "legendFormat": "P50",
+          "refId": "P50 DB Latency"
+        }
+      ],
+      "yaxes": [
+        {
+          "format": "s",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "fill": 1,
+      "fillGradient": 0,
+      "hiddenSeries": false,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "thresholds": [],
+      "timeRegions": [],
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      },
+      "timeFrom": null,
+      "timeShift": null,
+      "grid": {
+        "threshold1": null,
+        "threshold1Color": "rgba(216, 200, 27, 0.27)",
+        "threshold2": null,
+        "threshold2Color": "rgba(234, 112, 112, 0.22)"
+      }
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 20
+      },
+      "id": 7,
+      "panels": [],
+      "title": "App Runtime Metrics",
+      "type": "row"
+    },
+    {
+      "id": 8,
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 0,
+        "y": 21
+      },
+      "type": "graph",
+      "title": "CPU Usage",
+      "datasource": null,
+      "targets": [
+        {
+          "expr": "rate(process_cpu_seconds_total{job=\"go-app\"}[1m])",
+          "legendFormat": "CPU Usage",
+          "refId": "CPU Usage"
+        }
+      ],
+      "yaxes": [
+        {
+          "format": "percentunit",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "fill": 1,
+      "fillGradient": 0,
+      "hiddenSeries": false,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "thresholds": [],
+      "timeRegions": [],
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      },
+      "timeFrom": null,
+      "timeShift": null,
+      "grid": {
+        "threshold1": null,
+        "threshold1Color": "rgba(216, 200, 27, 0.27)",
+        "threshold2": null,
+        "threshold2Color": "rgba(234, 112, 112, 0.22)"
+      }
+    },
+    {
+      "id": 9,
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 8,
+        "y": 21
+      },
+      "type": "graph",
+      "title": "Memory Usage",
+      "datasource": null,
+      "targets": [
+        {
+          "expr": "process_resident_memory_bytes{job=\"go-app\"}",
+          "legendFormat": "Memory Usage",
+          "refId": "Memory Usage"
+        }
+      ],
+      "yaxes": [
+        {
+          "format": "bytes",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "fill": 1,
+      "fillGradient": 0,
+      "hiddenSeries": false,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "thresholds": [],
+      "timeRegions": [],
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      },
+      "timeFrom": null,
+      "timeShift": null,
+      "grid": {
+        "threshold1": null,
+        "threshold1Color": "rgba(216, 200, 27, 0.27)",
+        "threshold2": null,
+        "threshold2Color": "rgba(234, 112, 112, 0.22)"
+      }
+    },
+    {
+      "id": 10,
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 16,
+        "y": 21
+      },
+      "type": "graph",
+      "title": "Goroutine Count",
+      "datasource": null,
+      "targets": [
+        {
+          "expr": "go_goroutines{job=\"go-app\"}",
+          "legendFormat": "Goroutines",
+          "refId": "Goroutine Count"
+        }
+      ],
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "fill": 1,
+      "fillGradient": 0,
+      "hiddenSeries": false,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "thresholds": [],
+      "timeRegions": [],
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      },
+      "timeFrom": null,
+      "timeShift": null,
+      "grid": {
+        "threshold1": null,
+        "threshold1Color": "rgba(216, 200, 27, 0.27)",
+        "threshold2": null,
+        "threshold2Color": "rgba(234, 112, 112, 0.22)"
+      }
+    }
+  ],
+  "refresh": "5s",
+  "schemaVersion": 38,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-15m",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "Demo GoLang Prometheus",
+  "uid": "b7a3c9f2",
+  "version": 1,
+  "weekStart": ""
+}
