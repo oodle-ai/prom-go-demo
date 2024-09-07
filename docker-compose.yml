@@ -1,0 +1,27 @@
+services:
+  go-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    networks:
+      - app-network
+
+  prometheus:
+    image: prom/prometheus:latest
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./prometheus-entrypoint.sh:/prometheus-entrypoint.sh
+    ports:
+      - "9090:9090"
+    networks:
+      - app-network
+    environment:
+      - REMOTE_WRITE_URL=${REMOTE_WRITE_URL}
+      - X_API_KEY=${X_API_KEY}
+    entrypoint: ["/bin/sh", "/prometheus-entrypoint.sh"]
+
+networks:
+  app-network:
+    driver: bridge
