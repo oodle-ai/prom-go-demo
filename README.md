@@ -18,7 +18,6 @@ then collected by Prometheus and sent to a Oodle remote write endpoint.
 - `docker-compose.yml`: Defines and configures the services.
 - `prometheus.yml`: Configuration file for Prometheus.
 - `prometheus-entrypoint.sh`: Script to process the Prometheus configuration file.
-- `grafana-dashboard.json`: A grafana dashboard which can be imported to visualize the emitted metrics.
 
 ## Setup
 
