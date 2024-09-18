@@ -51,9 +51,9 @@ const (
 
 var (
 	dbPool               = make(chan struct{}, maxDBConnections)
-	lastSpikeTime        time.Time
-	spikeDuration        = 30 * time.Second
-	spikeInterval        = 5 * time.Minute
+	lastSpikeTime        = time.Now()
+	spikeDuration        = 3 * time.Minute
+	spikeInterval        = 10 * time.Minute
 	spikeMutex           sync.Mutex
 	customers            = []string{"Alpha", "Beta", "Gamma", "Delta", "Epsilon"}
 	operations           = []string{"Create", "Read", "Update", "Delete", "List", "Search", "Export", "Import", "Analyze", "Report"}
