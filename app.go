@@ -6,6 +6,7 @@ import (
 	"io"
 	"math/rand"
 	"net/http"
+	"os"
 	"sync"
 	"time"
 
@@ -61,13 +62,18 @@ var (
 )
 
 func main() {
-	go runClient()
-
 	http.HandleFunc("/", handleRequest)
 	http.Handle("/metrics", promhttp.Handler())
 
-	fmt.Println("Server starting on :8080")
-	http.ListenAndServe(":8080", nil)
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "6767"
+	}
+
+	go runClient(port)
+
+	fmt.Println("Server starting on :" + port)
+	http.ListenAndServe(":"+port, nil)
 }
 
 func handleRequest(w http.ResponseWriter, r *http.Request) {
@@ -110,7 +116,7 @@ func handleRequest(w http.ResponseWriter, r *http.Request) {
 	latency.WithLabelValues(operation, fmt.Sprintf("%d", status), customer).Observe(time.Since(start).Seconds())
 }
 
-func runClient() {
+func runClient(port string) {
 	for {
 		rps := getRequestsPerSecond()
 		ticker := time.NewTicker(time.Second / time.Duration(rps))
@@ -126,7 +132,7 @@ func runClient() {
 					defer wg.Done()
 					customer := customers[rand.Intn(numCustomers)]
 					operation := operations[rand.Intn(numOperations)]
-					req, _ := http.NewRequestWithContext(ctx, "GET", "http://localhost:8080", nil)
+					req, _ := http.NewRequestWithContext(ctx, "GET", "http://localhost:"+port, nil)
 					req.Header.Set("X-Customer", customer)
 					req.Header.Set("X-Operation", operation)
 					resp, err := http.DefaultClient.Do(req)
