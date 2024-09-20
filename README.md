@@ -8,8 +8,8 @@ then collected by Prometheus and sent to a Oodle remote write endpoint.
 
 - Docker
 - Docker Compose
-- The application requires 8080 and 9090 ports to be free. You can change
-  the ports in `docker-compose.yml` and `prometheus.yml` files if needed.
+- The application requires 6767 and 9797 ports to be free. You can change
+  the ports by updating `.env` file
 
 ## Project Structure
 
@@ -44,8 +44,8 @@ then collected by Prometheus and sent to a Oodle remote write endpoint.
    This command will build the Go application and start all services defined in the `docker-compose.yml` file.
 
 2. The services will be available at the following addresses:
-   - Go Application: http://localhost:8080
-   - Prometheus: http://localhost:9090
+   - Go Application: http://localhost:6767
+   - Prometheus: http://localhost:9797
 
 3. On successful launch, metrics will be available for consumption in your Oodle UI. 
 
@@ -61,7 +61,9 @@ docker-compose down
 
 If you encounter any issues:
 
-1. Ensure all required ports are free on your host machine.
+1. Ensure all required ports (6767, 9797) are free on your host machine.
+   If you want to change the ports to be used, you can update `.env` file
+   to specify `APP_PORT` and `PROMETHEUS_PORT`.
 2. Check the Docker logs for any error messages:
    ```
    docker-compose logs

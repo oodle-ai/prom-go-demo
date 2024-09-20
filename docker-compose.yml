@@ -4,7 +4,9 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "8080:8080"
+      - "${APP_PORT}:${APP_PORT}"
+    environment:
+      - PORT=${APP_PORT}
     networks:
       - app-network
 
@@ -14,12 +16,14 @@ services:
       - ./prometheus.yml:/etc/prometheus/prometheus.yml
       - ./prometheus-entrypoint.sh:/prometheus-entrypoint.sh
     ports:
-      - "9090:9090"
+      - "${PROMETHEUS_PORT}:${PROMETHEUS_PORT}"
     networks:
       - app-network
     environment:
       - REMOTE_WRITE_URL=${REMOTE_WRITE_URL}
       - X_API_KEY=${X_API_KEY}
+      - PROMETHEUS_PORT=${PROMETHEUS_PORT}
+      - APP_PORT=${APP_PORT}
     entrypoint: ["/bin/sh", "/prometheus-entrypoint.sh"]
 
 networks:

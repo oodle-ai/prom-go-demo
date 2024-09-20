@@ -4,11 +4,11 @@ global:
 scrape_configs:
   - job_name: 'go-app'
     static_configs:
-      - targets: ['go-app:8080']
+      - targets: ['go-app:${APP_PORT}']
   
   - job_name: 'prometheus'
     static_configs:
-      - targets: ['localhost:9090']
+      - targets: ['localhost:${PROMETHEUS_PORT}']
 
 remote_write:
   - url: "${REMOTE_WRITE_URL}"
